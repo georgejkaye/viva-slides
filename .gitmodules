@@ -1,0 +1,6 @@
+[submodule "figures"]
+	path = figures
+	url = git@github.com:georgejkaye/figures.git
+[submodule "macros"]
+	path = macros
+	url = git@github.com:georgejkaye/macros.git

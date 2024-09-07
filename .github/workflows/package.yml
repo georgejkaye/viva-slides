@@ -1,0 +1,94 @@
+name: Compile and package project
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Package the presentation slides
+        uses: georgejkaye/latex-packager@v1.1
+        with:
+          input-dir: .
+          main: main-presentation
+          project-name: main-presentation
+          shell-escape: true
+      - name: Package the static slides
+        uses: georgejkaye/latex-packager@v1.0
+        with:
+          input-dir: .
+          main: main-static
+          project-name: main-static
+      - name: Set tag name
+        id: name
+        run: echo "name=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+      - name: Upload presentation slides as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.name.outputs.name }}-presentation.pdf
+          path: main-presentation.pdf
+      - name: Upload static slides as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.name.outputs.name }}-static.pdf
+          path: main-static.pdf
+      - name: Create a new release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: Latest draft
+          tag_name: ${{ steps.name.outputs.name }}-draft
+          body: Latest draft as of ${{ steps.name.outputs.name }}
+      - name: Upload the presentation slides to the release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: main-presentation.pdf
+          asset_name: ${{ github.event.repository.name}}-${{ steps.name.outputs.name }}-presentation.pdf
+          asset_content_type: pdf
+      - name: Upload the static slides to the release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: main-static.pdf
+          asset_name: ${{ github.event.repository.name}}-${{ steps.name.outputs.name }}-static.pdf
+          asset_content_type: pdf
+      - name: Upload the presentation zip to the release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: main-presentation.zip
+          asset_name: ${{ github.event.repository.name }}-${{ steps.name.outputs.name }}-presentation.zip
+          asset_content_type: zip
+      - name: Upload the static zip to the release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: main-static.zip
+          asset_name: ${{ github.event.repository.name }}-${{ steps.name.outputs.name }}-static.zip
+          asset_content_type: zip
+      - name: Delete older releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 1
+          delete_tags: true
+          delete_tag_pattern: "draft"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
