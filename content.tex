@@ -24,6 +24,28 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Part I: Semantics of Digital Circuits}
+
+    \LARGE
+    \centering
+
+    \textbf{Goal:}
+
+    Take existing (informal) work on categorical circuits, and
+    transform it into a mathematically rigorous framework.
+
+    \normalsize
+
+    \vspace{1em}
+
+    Dan R.\ Ghica and Achim Jung, 2016. \\ \textbf{Categorical Semantics of Digital Circuits}
+
+    Dan R.\ Ghica, Achim Jung, and Aliaume Lopez, 2017. \\ \textbf{Diagrammatic Semantics for Digital Circuits}
+
+
+\end{frame}
+
+\begin{frame}
     \frametitle{Chapter 3: Syntax}
 
     \textbf{Previously:} syntax and semantics confusingly intermingled with
@@ -226,7 +248,7 @@
 
         \vspace{0.5em}
 
-        \(\scircsigmai \cong \streami\)
+        \(\scircsigmaobs \cong \scircsigmai\)
     \end{center}
 
 
@@ -235,6 +257,16 @@
 \begin{frame}
     \frametitle{Chapter 6: Algebraic semantics}
 
+    \textbf{Previously:} circuits quotiented by certain `natural laws', along
+    with quotients of `extensional equivalence' to add in remaining equalities
+
+    \textbf{Now:} set of equations \(\mce_\interpretation\) guided by the stream
+    semantics; some local interactions and some `contextual' equations
+
+    \begin{center}
+        \LARGE
+        \(\scircsigmae \cong \scircsigmai\)
+    \end{center}
 
 
 \end{frame}
@@ -242,12 +274,163 @@
 \begin{frame}
     \frametitle{Chapter 7: Potential applications}
 
+    Primarily \alert{theoretical}, but have also considered potential
+    \alert{applications}
+
+    Ideas to \alert{complement} existing circuit technologies rather than
+    \alert{replace} them
+
+    \large
+    \vspace{0.5em}
+
+    \pause
+
+    \begin{center}
+        \begin{minipage}{0.45\textwidth}
+            \textbf{Partial evaluation}
+            \centering
+
+            \vspace{0.25em}
+
+            Fixing some inputs and reducing circuits accordingly
+
+        \end{minipage}
+        \quad\pause
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \textbf{Refining circuits}
+
+            \vspace{0.25em}
+
+            Using (in)equational reasoning to improve circuit performance
+        \end{minipage}
+
+        \pause
+        \vspace{1em}
+
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \textbf{Layers of abstraction}
+
+            \vspace{0.25em}
+
+            Working at different abstractions in the same diagram
+        \end{minipage}
+        \quad\pause
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \textbf{Tidying}
+
+            \vspace{0.25em}
+
+            Automatically remove redundant parts of circuits
+
+        \end{minipage}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part II: Semantics of Digital Circuits}
+
+    \pause
+
+    \LARGE
+    \centering
+
+    \textbf{Goal:}
+
+    Adapt existing work on string diagram hypergraph rewriting and adapt it
+    to the \alert{traced comonoid} case
+
+    \normalsize
+
+    \vspace{1em}
+    \pause
+
+    Bonchi et al, 2016. \\ \textbf{Rewriting modulo symmetric monoidal structure}
+
+    Bonchi et al, 2021. \\ \textbf{String diagram rewrite theory I: Rewriting with Frobenius structure}
+
+    Bonchi et al, 2022. \\ \textbf{String diagram rewrite theory II: Rewriting with symmetric monoidal structure}
 
 
 \end{frame}
 
 \begin{frame}
     \frametitle{Chapter 8: String diagrams as hypergraphs}
+
+    String diagrams encoded as \alert{cospans of hypergraphs}
+
+    \textbf{Contribution:}
+    Traced terms correspond to \alert{partial monogamous} cospans, in which
+    vertices have at most one `in' and `out' connection
+
+    \vspace{1em}
+
+    \begin{center}
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \LARGE
+            \(\pmcspdhyp\)
+
+            \Large
+            Partial monogamous cospans of hypergraphs
+
+            \vspace{0.5em}
+
+            \dsptikzfig{graphs/partial-monogamy/yes-0}
+        \end{minipage}
+        \qquad
+        {\LARGE \(\cong\)}
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \LARGE
+            \(\stmcsigma\)
+
+            \Large
+            Traced terms
+
+            \vspace{1em}
+
+            \dsptikzfig{graphs/terms/term-0}
+        \end{minipage}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chapter 8: String diagrams as hypergraphs}
+
+    \begin{center}
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \LARGE
+            \(\pmcspdhyp\)
+
+            \Large
+            Partial monogamous cospans of hypergraphs
+
+            \vspace{0.5em}
+
+            \dsptikzfig{graphs/partial-monogamy/yes-comonoid-0}
+        \end{minipage}
+        \qquad
+        {\LARGE \(\cong\)}
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            \LARGE
+            \(\stmcsigma + \ccomon\)
+
+            \Large
+            Traced comonoid terms
+
+            \vspace{1em}
+
+            \normalsize
+            \dsptikzfig{graphs/terms/comonoid-term-0}
+        \end{minipage}
+    \end{center}
 
 
 
