@@ -1,5 +1,6 @@
 % !TeX root = main-presentation.tex
 \usepackage{figures/tikzit}
+\usepackage{tikz-cd}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{xparse}
@@ -48,6 +49,8 @@
 \setbeamercolor{alerted text}{fg=draccent}
 
 \newcommand{\wait}{\iftoggle{static}{}{\pause}}
+\newcommand{\bgcolour}{white}
+
 
 \newtheorem{proposition}{Proposition}
 
@@ -76,6 +79,6 @@
 \date{Wednesday 11 September 2024}
 
 \begin{document}
-    \maketitle
-    \input{content}
+\maketitle
+\input{content}
 \end{document}

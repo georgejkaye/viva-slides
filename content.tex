@@ -26,65 +26,208 @@
 \begin{frame}
     \frametitle{Chapter 3: Syntax}
 
-    In previous work syntax and semantics intermingled
+    \textbf{Previously:} syntax and semantics confusingly intermingled with
+    layers of quotients and equations
 
     \pause
 
-    We define two \alert{syntactic categories}:
+    \textbf{Now:} syntax of circuits defined before considering any behaviour
 
     \pause
 
-    \(\ccircsigma\) of \emph{combinational circuits}
+    \vspace{1em}
 
-    \pause
+    \begin{center}
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            {\LARGE\(\ccircsigma\)}
 
-    \(\scircsigma\) of \emph{sequential circuits}
+            \vspace{1em}
 
-    \pause
+            \alert{Combinational} circuits
 
-    These are circuits in which circuit morphisms are \alert{constructed}
+            (functions)
+        \end{minipage}
+        \pause
+        {\LARGE\(\hookrightarrow\)}
+        \begin{minipage}{0.4\textwidth}
+            \centering
+            {\LARGE\(\scircsigma\)}
 
-    \pause
+            \vspace{1em}
 
-    They have \alert{no behaviour} associated with them
+            \alert{Sequential} circuits
+
+            (stateful)
+        \end{minipage}
+    \end{center}
 
 \end{frame}
 
 \begin{frame}
     \frametitle{Chapter 4: Denotational semantics}
 
-    Previously behaviour of circuit morphisms only considered informally
+    \pause
 
+    \textbf{Previously:} denotations of circuits only considered informally
 
+    \pause
 
-    We assign \alert{behaviour} to circuit morphisms in terms of
-    \alert{causal, monotone, and finitely specified stream functions}
+    \textbf{Now:} assign behaviour to circuit morphisms in terms of
+    \alert{causal, monotone, and finitely specified stream functions} using
+    a construction via \alert{Mealy machines}
 
+    \pause
+
+    \vspace{1em}
+
+    \begin{center}
+        \begin{minipage}{0.15\textwidth}
+            \centering
+            {\LARGE\(\scircsigma\)}
+        \end{minipage}
+        \pause
+        \(\xrightarrow{\circuittomealyi}\)
+        \begin{minipage}{0.25\textwidth}
+            \centering
+            {\LARGE\(\mealyi\)}
+
+            \vspace{0.5em}
+
+            \alert{Monotone} Mealy machines
+        \end{minipage}
+        \pause
+        \(\xrightarrow{\mealytocircuiti}\)
+        \begin{minipage}{0.375\textwidth}
+            \centering
+            {\LARGE\(\streami\)}
+
+            \vspace{0.5em}
+
+            \alert{Causal, monotone, finitely specified} stream functions
+        \end{minipage}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chapter 4: Denotational semantics}
+
+    \begin{center}
+        \LARGE
+        \(\scircsigma \xrightarrow{\circuittostreami} \streami\)
+    \end{center}
 
     \[
         \circuittostreami[
-        \iltikzfig{strings/category/f}[box=f,colour=seq]
+            \dsptikzfig{strings/category/f}[box=f,colour=seq]
         ]
         =
         \circuittostreami[
-        \iltikzfig{strings/category/f}[box=g,colour=seq]
+            \dsptikzfig{strings/category/f}[box=g,colour=seq]
         ]
         \quad
         \Rightarrow
         \quad
-        \iltikzfig{strings/category/f}[box=f,colour=seq]
+        \dsptikzfig{strings/category/f}[box=f,colour=seq]
         \extequivi
-        \iltikzfig{strings/category/f}[box=g,colour=seq]
+        \dsptikzfig{strings/category/f}[box=g,colour=seq]
     \]
 
-    \Large
-    \alert{Denotational equivalence}
+
+    \begin{center}
+        \LARGE
+        \alert{Denotational equivalence}
+
+        \vspace{1em}
+
+        \(\scircsigmai \cong \streami\)
+    \end{center}
+
 
 \end{frame}
 
 \begin{frame}
     \frametitle{Chapter 5: Operational semantics}
 
+    \textbf{Previously:} reduction strategy for \alert{closed} circuits with
+    \alert{delay-guarded} feedback
+
+    \textbf{Now:} reduction strategy for any \alert{open} circuit using novel
+    rule for \alert{unrolling non-delay-guarded feedback}
+
+    \[
+        \dsptikzfig{circuits/instant-feedback/equation-lhs}[box=f]
+        \reduction
+        \dsptikzfig{circuits/instant-feedback/concrete-unfolding}[box=f]
+    \]
+
+    \vspace{0.5em}
+
+    \scalebox{0.9}{
+        \(
+        \dsptikzfig{circuits/productivity/productive-goal-lhs}[box=f]
+        \reduction
+        \dsptikzfig{circuits/productivity/mealy-form-applied}[core=\hat{f}]
+        \reduction
+        \dsptikzfig{circuits/productivity/mealy-form-instant-registers}[core=\hat{f}]
+        \reduction
+        \dsptikzfig{circuits/productivity/productive-goal-rhs}[box=g]
+        \)
+    }
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chapter 5: Operational semantics}
+
+    \begin{center}
+        \begin{minipage}{0.55\textwidth}
+            \centering
+            \dsptikzfig{strings/category/f}[box=f,colour=seq]
+            and
+            \dsptikzfig{strings/category/f}[box=g,colour=seq]
+            produce the same
+
+            \vspace{0.5em}
+
+            outputs using the productive
+            strategy
+        \end{minipage}
+        \quad
+        \(\Rightarrow\)
+        \begin{minipage}{0.3\textwidth}
+            \centering
+            \(
+            \dsptikzfig{strings/category/f}[box=f,colour=seq]
+            \sim_{\interpretation}
+            \dsptikzfig{strings/category/f}[box=g,colour=seq]
+            \)
+        \end{minipage}
+    \end{center}
+
+    \vspace{0.25em}
+
+    \begin{center}
+        \LARGE
+        \alert{Observational equivalence}
+
+        \vspace{0.5em}
+
+        \(
+        \dsptikzfig{strings/category/f}[box=f,colour=seq]
+        \sim_{\interpretation}
+        \dsptikzfig{strings/category/f}[box=g,colour=seq]
+        \Leftrightarrow
+        \dsptikzfig{strings/category/f}[box=f,colour=seq]
+        \extequivi
+        \dsptikzfig{strings/category/f}[box=g,colour=seq]
+        \)
+
+        \vspace{0.5em}
+
+        \(\scircsigmai \cong \streami\)
+    \end{center}
 
 
 \end{frame}
