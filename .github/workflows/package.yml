@@ -21,11 +21,12 @@ jobs:
           project-name: main-presentation
           shell-escape: true
       - name: Package the static slides
-        uses: georgejkaye/latex-packager@v1.0
+        uses: georgejkaye/latex-packager@v1.1
         with:
           input-dir: .
           main: main-static
           project-name: main-static
+          shell-escape: true
       - name: Set tag name
         id: name
         run: echo "name=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
