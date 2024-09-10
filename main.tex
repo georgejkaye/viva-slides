@@ -2,6 +2,7 @@
 \usepackage{figures/tikzit}
 \usepackage{tikz-cd}
 \usepackage{graphicx}
+\usepackage{svg}
 \usepackage{amssymb}
 \usepackage{xparse}
 \usepackage{stmaryrd}
@@ -19,11 +20,14 @@
   background=light,
   numbering=counter,
   block=fill,
-  %sectionpage=simple
+  sectionpage=none
 ]{metropolis}
 
 \input{figures/circuits.tikzstyles}
 \input{figures/circuits.tikzdefs}
+
+\usepackage{biblatex}
+\addbibresource{refs/refs.biblatex.bib}
 
 % FiraFonts
 \usepackage[sfdefault]{FiraSans}
