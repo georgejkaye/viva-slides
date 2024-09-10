@@ -30,12 +30,12 @@ jobs:
         id: name
         run: echo "name=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
       - name: Upload presentation slides as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.name.outputs.name }}-presentation.pdf
           path: main-presentation.pdf
       - name: Upload static slides as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.name.outputs.name }}-static.pdf
           path: main-static.pdf
